@@ -1,0 +1,253 @@
+/*
+Theme Name:  Strendal
+Theme URI:   https://example.com/strendal
+Author:      Strendal
+Description: A luxury real-estate theme inspired by the Strendal property design.
+Version:     1.0.0
+Text Domain: strendal
+*/
+
+/* ── DESIGN TOKENS ── */
+:root {
+  --cream:        #f7faf5;
+  --white:        #ffffff;
+  --ink:          #1e3d14;
+  --ink-soft:     #3a4a36;
+  --ink-light:    #6a7e64;
+  --border:       #ccdfc0;
+  --border-soft:  #e2eedd;
+  --green:        #6a9e52;
+  --green-dark:   #4a7a38;
+  --green-light:  #e4f0da;
+  --gold:         #c8952a;
+  --gold-light:   #e8b84a;
+}
+
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+}
+
+h1 { font-size: clamp(36px, 5vw, 64px); }
+h2 { font-size: clamp(28px, 3.5vw, 44px); }
+h3 { font-size: clamp(22px, 2.5vw, 32px); }
+
+p {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.85;
+}
+
+em, i { font-style: italic; }
+
+/* ── SECTION EYEBROW ── */
+.section-eyebrow {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+
+/* ── BUTTONS ── */
+.btn-primary,
+.btn-secondary,
+.btn-green,
+.btn-outline {
+  font-family: 'Jost', sans-serif;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.2s;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); color: #fff; }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.45);
+  backdrop-filter: blur(4px);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.2); color: #fff; }
+
+.btn-green {
+  background: var(--green);
+  color: #fff;
+  border: 1.5px solid var(--green);
+}
+.btn-green:hover { background: var(--green-dark); color: #fff; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--green);
+  border: 1.5px solid var(--green);
+}
+.btn-outline:hover { background: var(--green); color: #fff; }
+
+/* ── NAVIGATION ── */
+#site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+#site-nav.scrolled {
+  background: rgba(247,250,245,0.96);
+  box-shadow: 0 1px 20px rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.5px;
+  transition: color 0.4s;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+#site-nav.scrolled .nav-logo { color: var(--ink); }
+
+/* WordPress nav menu reset */
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li { position: relative; }
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+#site-nav.scrolled .nav-links a { color: var(--ink-soft); }
+.nav-links a:hover { color: var(--green) !important; }
+
+.nav-cta {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+#site-nav.scrolled .nav-cta { border-color: var(--green); color: var(--green); }
+.nav-cta:hover { background: var(--green) !important; border-color: var(--green) !important; color: #fff !important; }
+
+/* ── FOOTER ── */
+footer {
+  background: #1c2a1e;
+  color: rgba(255,255,255,0.55);
+  padding: 32px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-left {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.2px;
+}
+.footer-right {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  text-align: right;
+  line-height: 1.6;
+}
+.footer-right a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-right a:hover { color: rgba(255,255,255,0.8); }
+
+/* ── MAIN CONTENT AREA (non-homepage) ── */
+.site-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 48px 80px;
+}
+.site-main h1 { margin-bottom: 24px; }
+.site-main p  { margin-bottom: 16px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.2); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  #site-nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+  .footer-right { justify-content: center; text-align: center; }
+  .site-main { padding: 100px 24px 60px; }
+}
