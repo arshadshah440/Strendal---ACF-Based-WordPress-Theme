@@ -1,0 +1,1 @@
+# Strendal---ACF-Based-WordPress-Theme
