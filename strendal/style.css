@@ -2,7 +2,6 @@
 Theme Name:  Strendal
 Theme URI:   https://github.com/arshadshah440/Strendal---ACF-Based-WordPress-Theme
 Author:      Arshad Shah
-Author URI:  https://arshadwebstudio.com
 Description: A luxury real-estate theme inspired by the Strendal property design.
 Version:     1.0.0
 Text Domain: strendal
@@ -207,7 +206,7 @@ em, i { font-style: italic; }
 
 /* ── FOOTER ── */
 footer {
-  background: #1c2a1e;
+  background: #1e3d14;
   color: rgba(255,255,255,0.55);
   padding: 32px 48px;
   display: flex;

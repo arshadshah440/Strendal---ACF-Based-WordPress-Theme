@@ -97,6 +97,36 @@ add_action( 'wp_enqueue_scripts', function () {
 			wp_get_theme()->get( 'Version' )
 		);
 	}
+
+	// The Living Heart page stylesheet
+	if ( is_page_template( 'page-templates/living-heart.php' ) ) {
+		wp_enqueue_style(
+			'strendal-living-heart',
+			get_template_directory_uri() . '/assets/css/living-heart.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// Inside the Home page stylesheet
+	if ( is_page_template( 'page-templates/inside-home.php' ) ) {
+		wp_enqueue_style(
+			'strendal-inside-home',
+			get_template_directory_uri() . '/assets/css/inside-home.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Investment page stylesheet
+	if ( is_page_template( 'page-templates/investment.php' ) ) {
+		wp_enqueue_style(
+			'strendal-investment',
+			get_template_directory_uri() . '/assets/css/investment.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
 } );
 
 /* ── INCLUDES ── */
