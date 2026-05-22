@@ -67,6 +67,36 @@ add_action( 'wp_enqueue_scripts', function () {
 			wp_get_theme()->get( 'Version' )
 		);
 	}
+
+	// The Story page stylesheet
+	if ( is_page_template( 'page-templates/story.php' ) ) {
+		wp_enqueue_style(
+			'strendal-story',
+			get_template_directory_uri() . '/assets/css/story.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// Ground Floor Bedroom page stylesheet
+	if ( is_page_template( 'page-templates/ground-bedroom.php' ) ) {
+		wp_enqueue_style(
+			'strendal-ground-bedroom',
+			get_template_directory_uri() . '/assets/css/ground-bedroom.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Garden page stylesheet
+	if ( is_page_template( 'page-templates/garden.php' ) ) {
+		wp_enqueue_style(
+			'strendal-garden',
+			get_template_directory_uri() . '/assets/css/garden.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
 } );
 
 /* ── INCLUDES ── */
@@ -79,7 +109,7 @@ add_action( 'wp_footer', function () {
 	<script>
 	(function () {
 		var nav = document.getElementById('site-nav');
-		if (!nav) return;
+		if (!nav || nav.classList.contains('always-light')) return;
 		function onScroll() {
 			nav.classList.toggle('scrolled', window.scrollY > 40);
 		}

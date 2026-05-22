@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -1075,5 +1075,533 @@ add_action( 'acf/init', function () {
 
 		], // end fields
 	] ); // end bedrooms group
+
+	/* ════════════════════════════════════════════════════════
+	   THE STORY page template fields
+	   ════════════════════════════════════════════════════════ */
+	acf_add_local_field_group( [
+		'key'      => 'group_strendal_story',
+		'title'    => 'The Story — Page Sections',
+		'location' => [ [ [ 'param' => 'page_template', 'operator' => '==', 'value' => 'page-templates/story.php' ] ] ],
+		'menu_order' => 0,
+		'fields'   => [
+
+			/* ── Opening ── */
+			[ 'key' => 'field_hs_opening_tab', 'label' => 'Opening', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_opening_use_default', 'label' => 'Content Source', 'name' => 'hs_opening_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_opening_eyebrow',  'label' => 'Eyebrow',   'name' => 'hs_opening_eyebrow',  'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_opening_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_opening_title',    'label' => 'Title (HTML allowed)', 'name' => 'hs_opening_title', 'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_opening_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_opening_subtitle', 'label' => 'Subtitle',  'name' => 'hs_opening_subtitle', 'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_opening_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+			/* ── Philosophy ── */
+			[ 'key' => 'field_hs_philosophy_tab', 'label' => 'Philosophy', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_philosophy_use_default', 'label' => 'Content Source', 'name' => 'hs_philosophy_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_philosophy_eyebrow', 'label' => 'Eyebrow', 'name' => 'hs_philosophy_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_philosophy_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_philosophy_title',   'label' => 'Title (HTML allowed)',   'name' => 'hs_philosophy_title', 'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_philosophy_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_philosophy_paras',   'label' => 'Paragraphs', 'name' => 'hs_philosophy_paras', 'type' => 'repeater',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_philosophy_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [ [ 'key' => 'field_hs_philosophy_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ] ] ],
+
+			/* ── Pillars ── */
+			[ 'key' => 'field_hs_pillars_tab', 'label' => 'Three Pillars', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_pillars_use_default', 'label' => 'Content Source', 'name' => 'hs_pillars_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_pillars_hd_title', 'label' => 'Header Title', 'name' => 'hs_pillars_hd_title', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_pillars_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_pillars_hd_body',  'label' => 'Header Subtitle', 'name' => 'hs_pillars_hd_body', 'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_pillars_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_pillars',          'label' => 'Pillars', 'name' => 'hs_pillars', 'type' => 'repeater', 'min' => 1, 'max' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_pillars_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_hs_p_icon_key', 'label' => 'Icon', 'name' => 'p_icon_key', 'type' => 'select',
+			      'choices' => [ 'land' => 'Land (pin)', 'light' => 'Light (sun)', 'soil' => 'Soil (plant)' ], 'default_value' => 'land' ],
+			    [ 'key' => 'field_hs_p_title', 'label' => 'Title', 'name' => 'p_title', 'type' => 'text' ],
+			    [ 'key' => 'field_hs_p_body',  'label' => 'Body',  'name' => 'p_body',  'type' => 'textarea', 'rows' => 3 ],
+			  ] ],
+
+			/* ── Family Story ── */
+			[ 'key' => 'field_hs_family_tab', 'label' => 'Family Story', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_family_use_default', 'label' => 'Content Source', 'name' => 'hs_family_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_family_eyebrow', 'label' => 'Eyebrow', 'name' => 'hs_family_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_family_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_family_title',   'label' => 'Title (HTML)', 'name' => 'hs_family_title', 'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_family_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_family_paras',   'label' => 'Paragraphs', 'name' => 'hs_family_paras', 'type' => 'repeater',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_family_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [ [ 'key' => 'field_hs_family_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ] ] ],
+			[ 'key' => 'field_hs_family_quote',   'label' => 'Pull Quote', 'name' => 'hs_family_quote', 'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_family_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_family_stats',   'label' => 'Stats', 'name' => 'hs_family_stats', 'type' => 'repeater', 'min' => 1, 'max' => 4,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_family_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_hs_stat_num', 'label' => 'Number / Value', 'name' => 'stat_num', 'type' => 'text' ],
+			    [ 'key' => 'field_hs_stat_lbl', 'label' => 'Label',          'name' => 'stat_lbl', 'type' => 'text' ],
+			  ] ],
+
+			/* ── Garden ── */
+			[ 'key' => 'field_hs_garden_tab', 'label' => 'Garden', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_garden_use_default', 'label' => 'Content Source', 'name' => 'hs_garden_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_garden_eyebrow', 'label' => 'Eyebrow',     'name' => 'hs_garden_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_garden_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_garden_title',   'label' => 'Title (HTML)', 'name' => 'hs_garden_title', 'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_garden_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_garden_paras',   'label' => 'Paragraphs', 'name' => 'hs_garden_paras', 'type' => 'repeater',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_garden_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [ [ 'key' => 'field_hs_garden_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ] ] ],
+			[ 'key' => 'field_hs_garden_card_title', 'label' => 'Card Title', 'name' => 'hs_garden_card_title', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_garden_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_garden_produce', 'label' => 'Produce Items', 'name' => 'hs_garden_produce', 'type' => 'repeater',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_garden_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [ [ 'key' => 'field_hs_produce_item', 'label' => 'Item', 'name' => 'produce_item', 'type' => 'text' ] ] ],
+			[ 'key' => 'field_hs_garden_footer',  'label' => 'Card Footer', 'name' => 'hs_garden_footer', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_garden_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+			/* ── Spice Door ── */
+			[ 'key' => 'field_hs_spice_tab', 'label' => 'Spice Door', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_spice_use_default', 'label' => 'Content Source', 'name' => 'hs_spice_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_spice_eyebrow',  'label' => 'Eyebrow',  'name' => 'hs_spice_eyebrow',  'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_spice_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_spice_title',    'label' => 'Title',    'name' => 'hs_spice_title',    'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_spice_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_spice_tagline',  'label' => 'Tagline (italic)',  'name' => 'hs_spice_tagline', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_spice_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_spice_paras',    'label' => 'Paragraphs', 'name' => 'hs_spice_paras', 'type' => 'repeater',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_spice_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [ [ 'key' => 'field_hs_spice_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ] ] ],
+			[ 'key' => 'field_hs_spice_steps',    'label' => 'Steps', 'name' => 'hs_spice_steps', 'type' => 'repeater',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_spice_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_hs_step_title', 'label' => 'Step Title', 'name' => 'step_title', 'type' => 'text' ],
+			    [ 'key' => 'field_hs_step_body',  'label' => 'Step Body',  'name' => 'step_body',  'type' => 'textarea', 'rows' => 2 ],
+			  ] ],
+
+			/* ── Outdoor Calendar ── */
+			[ 'key' => 'field_hs_cal_tab', 'label' => 'Outdoor Calendar', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_cal_use_default', 'label' => 'Content Source', 'name' => 'hs_cal_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_cal_eyebrow', 'label' => 'Eyebrow',     'name' => 'hs_cal_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cal_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_cal_title',   'label' => 'Title (HTML)', 'name' => 'hs_cal_title',   'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cal_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_cal_paras',   'label' => 'Paragraphs', 'name' => 'hs_cal_paras', 'type' => 'repeater',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cal_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [ [ 'key' => 'field_hs_cal_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ] ] ],
+			[ 'key' => 'field_hs_cal_card_title', 'label' => 'Card Title', 'name' => 'hs_cal_card_title', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cal_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_cal_items',   'label' => 'Calendar Items', 'name' => 'hs_cal_items', 'type' => 'repeater',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cal_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_hs_cal_month', 'label' => 'Month Range', 'name' => 'cal_month', 'type' => 'text' ],
+			    [ 'key' => 'field_hs_cal_label', 'label' => 'Description', 'name' => 'cal_label', 'type' => 'text' ],
+			  ] ],
+
+			/* ── Pull Quote ── */
+			[ 'key' => 'field_hs_pull_tab', 'label' => 'Pull Quote', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_pull_use_default', 'label' => 'Content Source', 'name' => 'hs_pull_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_pull_quote', 'label' => 'Quote', 'name' => 'hs_pull_quote', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_pull_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_pull_cite',  'label' => 'Citation', 'name' => 'hs_pull_cite', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_pull_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+			/* ── CTA ── */
+			[ 'key' => 'field_hs_cta_tab', 'label' => 'CTA', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key' => 'field_hs_cta_use_default', 'label' => 'Content Source', 'name' => 'hs_cta_use_default', 'type' => 'true_false',
+			  'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+
+			[ 'key' => 'field_hs_cta_title',    'label' => 'Title',       'name' => 'hs_cta_title',    'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_cta_body',     'label' => 'Body Text',   'name' => 'hs_cta_body',     'type' => 'textarea', 'rows' => 2,
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_cta_btn_text', 'label' => 'Button Text', 'name' => 'hs_cta_btn_text', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_hs_cta_btn_url',  'label' => 'Button URL',  'name' => 'hs_cta_btn_url',  'type' => 'url',
+			  'conditional_logic' => [ [ [ 'field' => 'field_hs_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+		], // end fields
+	] ); // end story group
+
+	/* ════════════════════════════════════════════════════════
+	   GROUND FLOOR BEDROOM PAGE TEMPLATE
+	   ════════════════════════════════════════════════════════ */
+	acf_add_local_field_group( [
+		'key'      => 'group_strendal_ground_bedroom',
+		'title'    => __( 'Ground Floor Bedroom Content', 'strendal' ),
+		'location' => [
+			[ [ 'param' => 'page_template', 'operator' => '==', 'value' => 'page-templates/ground-bedroom.php' ] ],
+		],
+		'menu_order' => 0, 'position' => 'normal', 'style' => 'default',
+		'label_placement' => 'top', 'instruction_placement' => 'label',
+		'fields' => [
+
+			/* ── TAB: Hero ── */
+			[ 'key' => 'field_gb_tab_hero', 'label' => 'Hero', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gb_hero_use_default', 'label' => 'Content Source', 'name' => 'gb_hero_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gb_hero_eyebrow', 'label' => 'Eyebrow', 'name' => 'gb_hero_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_hero_title', 'label' => 'Title', 'name' => 'gb_hero_title', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_hero_sub', 'label' => 'Subtext', 'name' => 'gb_hero_sub', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_hero_photo', 'label' => 'Hero Photo', 'name' => 'gb_hero_photo', 'type' => 'image',
+			  'return_format' => 'array', 'preview_size' => 'medium',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_hero_photo_caption', 'label' => 'Photo Caption', 'name' => 'gb_hero_photo_caption', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+			/* ── TAB: Value Strip ── */
+			[ 'key' => 'field_gb_tab_value', 'label' => 'Value Strip', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gb_value_use_default', 'label' => 'Content Source', 'name' => 'gb_value_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gb_value_items', 'label' => 'Value Items', 'name' => 'gb_value_items', 'type' => 'repeater',
+			  'min' => 1, 'max' => 8, 'layout' => 'table', 'button_label' => 'Add Item',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_value_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gb_vs_num',   'label' => 'Value', 'name' => 'vs_num',   'type' => 'text' ],
+			    [ 'key' => 'field_gb_vs_label', 'label' => 'Label', 'name' => 'vs_label', 'type' => 'text' ],
+			  ] ],
+
+			/* ── TAB: Story ── */
+			[ 'key' => 'field_gb_tab_story', 'label' => 'Story', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gb_story_use_default', 'label' => 'Content Source', 'name' => 'gb_story_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gb_story_left_label', 'label' => 'Left Eyebrow',     'name' => 'gb_story_left_label',  'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_story_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_story_left_title', 'label' => 'Left Title',       'name' => 'gb_story_left_title',  'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_story_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_story_left_paras', 'label' => 'Left Paragraphs', 'name' => 'gb_story_left_paras',  'type' => 'repeater',
+			  'min' => 1, 'layout' => 'block', 'button_label' => 'Add Paragraph',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_story_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gb_sl_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ],
+			  ] ],
+			[ 'key' => 'field_gb_story_rc_label', 'label' => 'Callout Label', 'name' => 'gb_story_rc_label', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_story_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_story_rc_text',  'label' => 'Callout Text',  'name' => 'gb_story_rc_text',  'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_story_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_story_right_label', 'label' => 'Right Eyebrow',     'name' => 'gb_story_right_label',  'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_story_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_story_right_title', 'label' => 'Right Title',       'name' => 'gb_story_right_title',  'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_story_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_story_right_paras', 'label' => 'Right Paragraphs', 'name' => 'gb_story_right_paras',  'type' => 'repeater',
+			  'min' => 1, 'layout' => 'block', 'button_label' => 'Add Paragraph',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_story_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gb_sr_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ],
+			  ] ],
+
+			/* ── TAB: Use Cases ── */
+			[ 'key' => 'field_gb_tab_uc', 'label' => 'Use Cases', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gb_uc_use_default', 'label' => 'Content Source', 'name' => 'gb_uc_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gb_uc_header_label', 'label' => 'Section Eyebrow', 'name' => 'gb_uc_header_label', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_uc_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_uc_header_title', 'label' => 'Section Title',   'name' => 'gb_uc_header_title', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_uc_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_uc_cards', 'label' => 'Use Case Cards', 'name' => 'gb_uc_cards', 'type' => 'repeater',
+			  'min' => 1, 'max' => 8, 'layout' => 'block', 'button_label' => 'Add Card',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_uc_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gb_uc_icon',  'label' => 'Emoji / Icon', 'name' => 'uc_icon',  'type' => 'text' ],
+			    [ 'key' => 'field_gb_uc_title', 'label' => 'Title',        'name' => 'uc_title', 'type' => 'text' ],
+			    [ 'key' => 'field_gb_uc_body',  'label' => 'Body Text',    'name' => 'uc_body',  'type' => 'textarea', 'rows' => 3 ],
+			  ] ],
+			[ 'key' => 'field_gb_uc_lived_icon', 'label' => 'Lived-Note Emoji', 'name' => 'gb_uc_lived_icon', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_uc_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_uc_lived_text', 'label' => 'Lived-Note Text',  'name' => 'gb_uc_lived_text', 'type' => 'textarea', 'rows' => 3,
+			  'instructions' => 'HTML allowed: use &lt;strong&gt; for bold.',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_uc_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+			/* ── TAB: Quote ── */
+			[ 'key' => 'field_gb_tab_quote', 'label' => 'Quote', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gb_quote_use_default', 'label' => 'Content Source', 'name' => 'gb_quote_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gb_quote_text', 'label' => 'Quote Text',  'name' => 'gb_quote_text', 'type' => 'textarea', 'rows' => 4,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_quote_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_quote_attr', 'label' => 'Attribution', 'name' => 'gb_quote_attr', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_quote_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+			/* ── TAB: Room Details ── */
+			[ 'key' => 'field_gb_tab_details', 'label' => 'Room Details', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gb_details_use_default', 'label' => 'Content Source', 'name' => 'gb_details_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gb_details_cards', 'label' => 'Detail Cards', 'name' => 'gb_details_cards', 'type' => 'repeater',
+			  'min' => 1, 'layout' => 'block', 'button_label' => 'Add Detail',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_details_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gb_dc_icon',  'label' => 'Emoji / Icon', 'name' => 'dc_icon',  'type' => 'text' ],
+			    [ 'key' => 'field_gb_dc_title', 'label' => 'Title',        'name' => 'dc_title', 'type' => 'text' ],
+			    [ 'key' => 'field_gb_dc_body',  'label' => 'Body Text',    'name' => 'dc_body',  'type' => 'textarea', 'rows' => 3 ],
+			  ] ],
+
+			/* ── TAB: CTA ── */
+			[ 'key' => 'field_gb_tab_cta', 'label' => 'CTA', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gb_cta_use_default', 'label' => 'Content Source', 'name' => 'gb_cta_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gb_cta_title',    'label' => 'Title',       'name' => 'gb_cta_title',    'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_cta_body',     'label' => 'Body Text',   'name' => 'gb_cta_body',     'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_cta_btn_text', 'label' => 'Button Text', 'name' => 'gb_cta_btn_text', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gb_cta_btn_url',  'label' => 'Button URL',  'name' => 'gb_cta_btn_url',  'type' => 'url',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gb_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+		], // end fields
+	] ); // end ground bedroom group
+
+	/* ════════════════════════════════════════════════════════
+	   GARDEN PAGE TEMPLATE
+	   ════════════════════════════════════════════════════════ */
+	acf_add_local_field_group( [
+		'key'      => 'group_strendal_garden',
+		'title'    => __( 'Garden Content', 'strendal' ),
+		'location' => [
+			[ [ 'param' => 'page_template', 'operator' => '==', 'value' => 'page-templates/garden.php' ] ],
+		],
+		'menu_order'            => 0,
+		'position'              => 'normal',
+		'style'                 => 'default',
+		'label_placement'       => 'top',
+		'instruction_placement' => 'label',
+		'fields' => [
+
+			/* ── TAB: Hero ── */
+			[ 'key' => 'field_gd_tab_hero', 'label' => 'Hero', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gd_hero_use_default', 'label' => 'Content Source', 'name' => 'gd_hero_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom',
+			  'message' => 'Use built-in default content. Switch to Custom to enter your own.' ],
+			[ 'key' => 'field_gd_hero_eyebrow', 'label' => 'Eyebrow', 'name' => 'gd_hero_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_hero_title', 'label' => 'Title', 'name' => 'gd_hero_title', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_hero_subtitle', 'label' => 'Subtitle', 'name' => 'gd_hero_subtitle', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_hero_bg_image', 'label' => 'Hero Background Image', 'name' => 'gd_hero_bg_image', 'type' => 'image',
+			  'return_format' => 'array', 'preview_size' => 'medium',
+			  'instructions' => 'Optional. Displayed as the full-height hero background. Without an image a dark green gradient is used.',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_hero_stats', 'label' => 'Stats', 'name' => 'gd_hero_stats', 'type' => 'repeater',
+			  'min' => 1, 'max' => 6, 'layout' => 'table', 'button_label' => 'Add Stat',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_hero_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gd_stat_num', 'label' => 'Number / Value', 'name' => 'stat_num', 'type' => 'text' ],
+			    [ 'key' => 'field_gd_stat_lbl', 'label' => 'Label',          'name' => 'stat_lbl', 'type' => 'text' ],
+			  ] ],
+
+			/* ── TAB: Zero Banner ── */
+			[ 'key' => 'field_gd_tab_zero', 'label' => 'Zero Banner', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gd_zero_use_default', 'label' => 'Content Source', 'name' => 'gd_zero_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gd_zero_items', 'label' => 'Benefit Items', 'name' => 'gd_zero_items', 'type' => 'repeater',
+			  'min' => 1, 'max' => 6, 'layout' => 'table', 'button_label' => 'Add Item',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_zero_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gd_zi_icon', 'label' => 'Emoji / Icon', 'name' => 'zi_icon', 'type' => 'text' ],
+			    [ 'key' => 'field_gd_zi_text', 'label' => 'Text',         'name' => 'zi_text', 'type' => 'text' ],
+			  ] ],
+
+			/* ── TAB: Philosophy ── */
+			[ 'key' => 'field_gd_tab_phil', 'label' => 'Philosophy', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gd_phil_use_default', 'label' => 'Content Source', 'name' => 'gd_phil_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gd_phil_eyebrow', 'label' => 'Eyebrow',  'name' => 'gd_phil_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_phil_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_phil_title', 'label' => 'Title', 'name' => 'gd_phil_title', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_phil_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_phil_paras', 'label' => 'Paragraphs', 'name' => 'gd_phil_paras', 'type' => 'repeater',
+			  'min' => 1, 'layout' => 'block', 'button_label' => 'Add Paragraph',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_phil_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gd_phil_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ],
+			  ] ],
+			[ 'key' => 'field_gd_phil_image', 'label' => 'Harvest Image', 'name' => 'gd_phil_image', 'type' => 'image',
+			  'return_format' => 'array', 'preview_size' => 'medium',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_phil_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_phil_caption', 'label' => 'Image Caption', 'name' => 'gd_phil_caption', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_phil_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+			/* ── TAB: What Grows ── */
+			[ 'key' => 'field_gd_tab_grows', 'label' => 'What Grows', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gd_grows_use_default', 'label' => 'Content Source', 'name' => 'gd_grows_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gd_grows_eyebrow', 'label' => 'Eyebrow', 'name' => 'gd_grows_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_grows_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_grows_title', 'label' => 'Title', 'name' => 'gd_grows_title', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_grows_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_grows_cards', 'label' => 'Produce Cards', 'name' => 'gd_grows_cards', 'type' => 'repeater',
+			  'min' => 1, 'layout' => 'table', 'button_label' => 'Add Produce',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_grows_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gd_gc_emoji', 'label' => 'Emoji', 'name' => 'gc_emoji', 'type' => 'text' ],
+			    [ 'key' => 'field_gd_gc_name',  'label' => 'Name',  'name' => 'gc_name',  'type' => 'text' ],
+			    [ 'key' => 'field_gd_gc_note',  'label' => 'Note',  'name' => 'gc_note',  'type' => 'text' ],
+			  ] ],
+			[ 'key' => 'field_gd_grows_herb_label', 'label' => 'Herb Strip Label', 'name' => 'gd_grows_herb_label', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_grows_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_grows_herbs', 'label' => 'Herb Items', 'name' => 'gd_grows_herbs', 'type' => 'repeater',
+			  'min' => 1, 'layout' => 'table', 'button_label' => 'Add Herb',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_grows_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gd_herb_name', 'label' => 'Herb Name', 'name' => 'herb_name', 'type' => 'text' ],
+			  ] ],
+
+			/* ── TAB: Abundance ── */
+			[ 'key' => 'field_gd_tab_abundance', 'label' => 'Abundance', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gd_abundance_use_default', 'label' => 'Content Source', 'name' => 'gd_abundance_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gd_abundance_image', 'label' => 'Harvest Image', 'name' => 'gd_abundance_image', 'type' => 'image',
+			  'return_format' => 'array', 'preview_size' => 'medium',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_abundance_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_abundance_img_caption', 'label' => 'Image Caption', 'name' => 'gd_abundance_img_caption', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_abundance_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_abundance_eyebrow', 'label' => 'Eyebrow', 'name' => 'gd_abundance_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_abundance_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_abundance_title', 'label' => 'Title', 'name' => 'gd_abundance_title', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_abundance_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_abundance_paras', 'label' => 'Paragraphs', 'name' => 'gd_abundance_paras', 'type' => 'repeater',
+			  'min' => 1, 'layout' => 'block', 'button_label' => 'Add Paragraph',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_abundance_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gd_abundance_para', 'label' => 'Paragraph', 'name' => 'paragraph', 'type' => 'textarea', 'rows' => 3 ],
+			  ] ],
+
+			/* ── TAB: Quote ── */
+			[ 'key' => 'field_gd_tab_quote', 'label' => 'Quote', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gd_quote_use_default', 'label' => 'Content Source', 'name' => 'gd_quote_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gd_quote_text', 'label' => 'Quote Text', 'name' => 'gd_quote_text', 'type' => 'textarea', 'rows' => 4,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_quote_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_quote_attribution', 'label' => 'Attribution', 'name' => 'gd_quote_attribution', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_quote_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+			/* ── TAB: Season Facts ── */
+			[ 'key' => 'field_gd_tab_facts', 'label' => 'Season Facts', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gd_facts_use_default', 'label' => 'Content Source', 'name' => 'gd_facts_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gd_facts_eyebrow', 'label' => 'Eyebrow', 'name' => 'gd_facts_eyebrow', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_facts_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_facts_title', 'label' => 'Title', 'name' => 'gd_facts_title', 'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_facts_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_facts_body', 'label' => 'Body Text', 'name' => 'gd_facts_body', 'type' => 'textarea', 'rows' => 4,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_facts_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_facts_cards', 'label' => 'Fact Cards', 'name' => 'gd_facts_cards', 'type' => 'repeater',
+			  'min' => 1, 'max' => 6, 'layout' => 'block', 'button_label' => 'Add Fact Card',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_facts_use_default', 'operator' => '==', 'value' => '0' ] ] ],
+			  'sub_fields' => [
+			    [ 'key' => 'field_gd_fc_icon',  'label' => 'Emoji / Icon', 'name' => 'fc_icon',  'type' => 'text' ],
+			    [ 'key' => 'field_gd_fc_title', 'label' => 'Title',        'name' => 'fc_title', 'type' => 'text' ],
+			    [ 'key' => 'field_gd_fc_body',  'label' => 'Body Text',    'name' => 'fc_body',  'type' => 'textarea', 'rows' => 3 ],
+			  ] ],
+
+			/* ── TAB: CTA ── */
+			[ 'key' => 'field_gd_tab_cta', 'label' => 'CTA', 'name' => '', 'type' => 'tab' ],
+			[ 'key' => 'field_gd_cta_use_default', 'label' => 'Content Source', 'name' => 'gd_cta_use_default',
+			  'type' => 'true_false', 'default_value' => 1, 'ui' => 1, 'ui_on_text' => 'Default', 'ui_off_text' => 'Custom' ],
+			[ 'key' => 'field_gd_cta_title',    'label' => 'Title',       'name' => 'gd_cta_title',    'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_cta_body',     'label' => 'Body Text',   'name' => 'gd_cta_body',     'type' => 'textarea', 'rows' => 3,
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_cta_btn_text', 'label' => 'Button Text', 'name' => 'gd_cta_btn_text', 'type' => 'text',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+			[ 'key' => 'field_gd_cta_btn_url',  'label' => 'Button URL',  'name' => 'gd_cta_btn_url',  'type' => 'url',
+			  'conditional_logic' => [ [ [ 'field' => 'field_gd_cta_use_default', 'operator' => '==', 'value' => '0' ] ] ] ],
+
+		], // end fields
+	] ); // end garden group
+
+	/* ════════════════════════════════════════════════════════
+	   PAGE LAYOUT — header & footer selector
+	   Applies to every page regardless of template.
+	   ════════════════════════════════════════════════════════ */
+	acf_add_local_field_group( [
+		'key'        => 'group_strendal_layout',
+		'title'      => 'Page Layout — Header &amp; Footer',
+		'location'   => [ [ [ 'param' => 'post_type', 'operator' => '==', 'value' => 'page' ] ] ],
+		'menu_order' => 5,
+		'position'   => 'side',
+		'fields'     => [
+
+			/* ── Header ── */
+			[ 'key' => 'field_layout_header_tab', 'label' => 'Header', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key'           => 'field_layout_show_header',
+			  'label'         => 'Show Header?',
+			  'name'          => 'page_show_header',
+			  'type'          => 'true_false',
+			  'default_value' => 1,
+			  'ui'            => 1,
+			  'ui_on_text'    => 'Show',
+			  'ui_off_text'   => 'Hide',
+			],
+
+			[ 'key'               => 'field_layout_header_style',
+			  'label'             => 'Header Style',
+			  'name'              => 'page_header_style',
+			  'type'              => 'select',
+			  'choices'           => [
+			    'default' => 'Default — Transparent (scrolls to light)',
+			    'light'   => 'Light — Always cream background',
+			  ],
+			  'default_value'     => 'default',
+			  'conditional_logic' => [ [ [ 'field' => 'field_layout_show_header', 'operator' => '==', 'value' => '1' ] ] ],
+			],
+
+			/* ── Footer ── */
+			[ 'key' => 'field_layout_footer_tab', 'label' => 'Footer', 'name' => '', 'type' => 'tab' ],
+
+			[ 'key'           => 'field_layout_show_footer',
+			  'label'         => 'Show Footer?',
+			  'name'          => 'page_show_footer',
+			  'type'          => 'true_false',
+			  'default_value' => 1,
+			  'ui'            => 1,
+			  'ui_on_text'    => 'Show',
+			  'ui_off_text'   => 'Hide',
+			],
+
+			[ 'key'               => 'field_layout_footer_style',
+			  'label'             => 'Footer Style',
+			  'name'              => 'page_footer_style',
+			  'type'              => 'select',
+			  'choices'           => [
+			    'default' => 'Default — Dark green',
+			    'minimal' => 'Minimal — Brand green',
+			    'green'   => 'Green — #6a9e52 with full contact info',
+			  ],
+			  'default_value'     => 'default',
+			  'conditional_logic' => [ [ [ 'field' => 'field_layout_show_footer', 'operator' => '==', 'value' => '1' ] ] ],
+			],
+
+		], // end fields
+	] ); // end layout group
 
 } );
