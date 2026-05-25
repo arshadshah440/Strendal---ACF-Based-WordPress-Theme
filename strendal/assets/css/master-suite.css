@@ -1,0 +1,469 @@
+/* ═══════════════════════════════════════════════════════
+   MASTER SUITE PAGE  —  master-suite.css
+   All classes prefixed with ms- to avoid cross-template conflicts
+   ═══════════════════════════════════════════════════════ */
+
+/* ── HERO ───────────────────────────────────────────────────────── */
+.ms-hero {
+  position: relative;
+  height: 100svh;
+  min-height: 580px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+@supports not (height: 100svh) { .ms-hero { height: 100vh; } }
+.ms-hero .hero-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+}
+.ms-hero .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(14,30,10,0.25) 0%,
+    rgba(14,30,10,0.18) 50%,
+    rgba(14,30,10,0.68) 100%
+  );
+}
+.ms-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 60px 68px;
+  max-width: 840px;
+}
+.ms-hero .hero-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 18px;
+}
+.ms-hero .hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 300;
+  line-height: 1.12;
+  color: #fff;
+  margin-bottom: 22px;
+}
+.ms-hero .hero-title em { font-style: italic; color: rgba(232,184,74,0.92); }
+.ms-hero .hero-sub {
+  font-size: 15.5px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.75;
+  max-width: 580px;
+}
+
+/* ── SUITE STRIP ────────────────────────────────────────────────── */
+.ms-suite-strip {
+  background: var(--green);
+  display: flex;
+  flex-wrap: wrap;
+}
+.ms-ss-item {
+  flex: 1;
+  min-width: 140px;
+  padding: 20px 22px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+}
+.ms-ss-item:last-child { border-right: none; }
+.ms-ss-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.ms-ss-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+}
+
+/* ── SHARED HELPERS ─────────────────────────────────────────────── */
+.ms-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ms-section-label::after {
+  content: '';
+  flex: 0 0 28px;
+  height: 1px;
+  background: var(--green);
+  opacity: 0.5;
+}
+
+/* ── BEDROOM INTRO (two-col) ────────────────────────────────────── */
+.ms-two-col {
+  padding: 88px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.ms-two-col h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.ms-two-col h2 em { font-style: italic; color: var(--green); }
+.ms-two-col p {
+  font-size: 15.5px;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.ms-two-col p:last-child { margin-bottom: 0; }
+
+/* ── PHOTO FRAMES ───────────────────────────────────────────────── */
+.ms-photo-frame {
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 16px 52px rgba(30,61,20,0.12);
+}
+.ms-photo-frame img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 3/2;
+  transition: transform 0.6s ease;
+}
+.ms-photo-frame:hover img { transform: scale(1.02); }
+.ms-photo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px 20px;
+  background: linear-gradient(transparent, rgba(14,30,10,0.70));
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+}
+
+/* Feature chips */
+.ms-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.ms-chip {
+  padding: 7px 15px;
+  background: var(--green-light);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--green-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ms-chip::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+/* ── THREE-PHOTO BEDROOM GRID ───────────────────────────────────── */
+.ms-bedroom-grid-section {
+  background: var(--green-light);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 60px;
+}
+.ms-bedroom-grid-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.ms-bedroom-grid-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.ms-bedroom-grid-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 2.8vw, 38px);
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.ms-bedroom-grid-header h2 em { font-style: italic; color: var(--green); }
+.ms-three-photo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.ms-tp-frame {
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(30,61,20,0.1);
+}
+.ms-tp-frame img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 3/2;
+  transition: transform 0.5s ease;
+}
+.ms-tp-frame:hover img { transform: scale(1.03); }
+.ms-tp-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 16px;
+  background: linear-gradient(transparent, rgba(14,30,10,0.68));
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+}
+
+/* ── DARK DIVIDER ───────────────────────────────────────────────── */
+.ms-dark-divider {
+  background: var(--ink);
+  padding: 64px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.ms-dark-divider::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 5% 85%, rgba(106,158,82,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 55% at 90% 10%, rgba(200,149,42,0.08) 0%, transparent 55%);
+}
+.ms-dd-inner {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+.ms-dd-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.9);
+}
+.ms-dd-quote em { font-style: normal; color: var(--gold-light); }
+.ms-dd-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.ms-dd-item {
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  border-left: 3px solid var(--gold-light);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.ms-dd-icon { font-size: 18px; flex-shrink: 0; }
+.ms-dd-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+.ms-dd-body { font-size: 12.5px; color: rgba(255,255,255,0.58); line-height: 1.5; }
+
+/* ── BATH SECTION ───────────────────────────────────────────────── */
+.ms-bath-section {
+  padding: 88px 60px;
+  background: var(--white);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+.ms-bath-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.ms-bath-inner h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.ms-bath-inner h2 em { font-style: italic; color: var(--green); }
+.ms-bath-inner p {
+  font-size: 15.5px;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.ms-bath-inner p:last-child { margin-bottom: 0; }
+.ms-bath-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ms-bath-photos .ms-photo-frame img { aspect-ratio: 16/9; }
+
+/* ── CLOSET SECTION ─────────────────────────────────────────────── */
+.ms-closet-section {
+  padding: 88px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.ms-closet-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.ms-closet-section h2 em { font-style: italic; color: var(--green); }
+.ms-closet-section p {
+  font-size: 15.5px;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.ms-closet-section p:last-child { margin-bottom: 0; }
+
+/* ── SUITE SUMMARY ──────────────────────────────────────────────── */
+.ms-summary-section {
+  background: var(--green-light);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 64px 60px;
+}
+.ms-summary-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.ms-summary-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.ms-summary-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 2.8vw, 38px);
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.ms-summary-header h2 em { font-style: italic; color: var(--green); }
+.ms-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.ms-sg-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 24px 22px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.ms-sg-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 4px 16px rgba(106,158,82,0.08);
+}
+.ms-sg-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.ms-sg-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+.ms-sg-body { font-size: 12.5px; color: var(--ink-light); line-height: 1.6; }
+
+/* ── CTA ────────────────────────────────────────────────────────── */
+.ms-cta-strip {
+  background: var(--green-dark);
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.ms-cta-strip .cta-left h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 300;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.ms-cta-strip .cta-left p {
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.62);
+  max-width: 480px;
+  line-height: 1.65;
+}
+
+/* ── SCROLL REVEAL ──────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .ms-hero .hero-content { padding: 80px 28px 52px; }
+  .ms-suite-strip { flex-wrap: wrap; }
+  .ms-ss-item { flex: 0 0 50%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .ms-two-col { grid-template-columns: 1fr; gap: 40px; padding: 56px 28px; }
+  .ms-bedroom-grid-section { padding: 48px 28px; }
+  .ms-three-photo { grid-template-columns: 1fr; }
+  .ms-dark-divider { padding: 52px 28px; }
+  .ms-dd-inner { grid-template-columns: 1fr; gap: 36px; }
+  .ms-bath-section { padding: 56px 28px; }
+  .ms-bath-inner { grid-template-columns: 1fr; gap: 40px; }
+  .ms-closet-section { grid-template-columns: 1fr; gap: 40px; padding: 56px 28px; }
+  .ms-summary-section { padding: 48px 28px; }
+  .ms-summary-grid { grid-template-columns: 1fr 1fr; }
+  .ms-cta-strip { padding: 48px 28px; flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .ms-hero .hero-content { padding: 72px 20px 44px; }
+  .ms-hero .hero-title { font-size: clamp(28px, 9vw, 42px); }
+  .ms-ss-item { flex: 0 0 50%; }
+  .ms-summary-grid { grid-template-columns: 1fr; }
+}

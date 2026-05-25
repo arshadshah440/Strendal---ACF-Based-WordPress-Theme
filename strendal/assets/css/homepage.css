@@ -379,6 +379,9 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
+  .hero{
+    min-height: 800px;
+  }
   .nav-logo{
     max-width: 140px;
     line-height: normal;

@@ -38,6 +38,15 @@ add_action( 'wp_enqueue_scripts', function () {
 		wp_get_theme()->get( 'Version' )
 	);
 
+	// Global nav script (scroll + hamburger menu)
+	wp_enqueue_script(
+		'strendal-nav',
+		get_template_directory_uri() . '/assets/js/nav.js',
+		[],
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
+
 	// Homepage-specific stylesheet
 	if ( is_page_template( 'page-templates/homepage.php' ) ) {
 		wp_enqueue_style(
@@ -123,6 +132,86 @@ add_action( 'wp_enqueue_scripts', function () {
 		wp_enqueue_style(
 			'strendal-investment',
 			get_template_directory_uri() . '/assets/css/investment.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Kitchen page stylesheet
+	if ( is_page_template( 'page-templates/kitchen.php' ) ) {
+		wp_enqueue_style(
+			'strendal-kitchen',
+			get_template_directory_uri() . '/assets/css/kitchen.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Screened Porch & Herb Garden page stylesheet
+	if ( is_page_template( 'page-templates/porch-herb.php' ) ) {
+		wp_enqueue_style(
+			'strendal-porch-herb',
+			get_template_directory_uri() . '/assets/css/porch-herb.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Living Room page stylesheet
+	if ( is_page_template( 'page-templates/living-room.php' ) ) {
+		wp_enqueue_style(
+			'strendal-living-room',
+			get_template_directory_uri() . '/assets/css/living-room.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Open Loft page stylesheet
+	if ( is_page_template( 'page-templates/loft.php' ) ) {
+		wp_enqueue_style(
+			'strendal-loft',
+			get_template_directory_uri() . '/assets/css/loft.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Master Suite page stylesheet
+	if ( is_page_template( 'page-templates/master-suite.php' ) ) {
+		wp_enqueue_style(
+			'strendal-master-suite',
+			get_template_directory_uri() . '/assets/css/master-suite.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Gallery page stylesheet
+	if ( is_page_template( 'page-templates/gallery.php' ) ) {
+		wp_enqueue_style(
+			'strendal-gallery',
+			get_template_directory_uri() . '/assets/css/gallery.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Visit This Home (Contact) page stylesheet
+	if ( is_page_template( 'page-templates/contact.php' ) ) {
+		wp_enqueue_style(
+			'strendal-contact',
+			get_template_directory_uri() . '/assets/css/contact.css',
+			[ 'strendal-style' ],
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+
+	// The Neighbourhood page stylesheet
+	if ( is_page_template( 'page-templates/neighborhood.php' ) ) {
+		wp_enqueue_style(
+			'strendal-neighborhood',
+			get_template_directory_uri() . '/assets/css/neighborhood.css',
 			[ 'strendal-style' ],
 			wp_get_theme()->get( 'Version' )
 		);

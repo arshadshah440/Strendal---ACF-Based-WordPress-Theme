@@ -405,6 +405,8 @@ get_header();
   <a href="<?php echo esc_url( $cta_btn_url ); ?>" class="btn-gold"><?php echo esc_html( $cta_btn_text ); ?></a>
 </div>
 
+<?php get_template_part( 'template-parts/editor-content' ); ?>
+
 <?php get_footer(); ?>
 
 <script>

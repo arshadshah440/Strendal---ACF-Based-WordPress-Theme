@@ -129,6 +129,8 @@ em, i { font-style: italic; }
   align-items: center;
   justify-content: space-between;
   transition: background 0.4s, box-shadow 0.4s;
+  /* Gradient tint keeps white links readable over any page background */
+  background: linear-gradient(180deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.10) 65%, transparent 100%);
 }
 #site-nav.scrolled {
   background: rgba(247,250,245,0.96);
@@ -191,6 +193,101 @@ em, i { font-style: italic; }
 }
 #site-nav.scrolled .nav-cta { border-color: var(--green); color: var(--green); }
 .nav-cta:hover { background: var(--green) !important; border-color: var(--green) !important; color: #fff !important; }
+
+/* ── NAV: DROPDOWNS ── */
+.nav-links li.menu-item-has-children { position: relative; }
+
+/* Chevron indicator on parent items */
+.nav-links li.menu-item-has-children > a::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  margin-left: 5px;
+  vertical-align: middle;
+  transition: transform 0.2s, translateY 0.2s;
+}
+.nav-links li.menu-item-has-children:hover > a::after,
+.nav-links li.menu-item-has-children:focus-within > a::after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+/* Invisible bridge: keeps li:hover alive while the mouse crosses the gap */
+.nav-links li.menu-item-has-children::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -12px;
+  right: -12px;
+  height: 14px; /* must match the gap below */
+}
+
+/* Dropdown panel */
+.nav-links .sub-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 210px;
+  background: rgba(247,250,245,0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(30,61,20,0.12), 0 2px 8px rgba(30,61,20,0.06);
+  padding: 6px 0;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 200;
+  pointer-events: none;
+}
+.nav-links li:hover > .sub-menu,
+.nav-links li:focus-within > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Small upward caret */
+.nav-links .sub-menu::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: rgba(247,250,245,0.98);
+  border-left: 1px solid var(--border-soft);
+  border-top: 1px solid var(--border-soft);
+}
+
+/* Dropdown links — always dark regardless of nav transparency */
+.nav-links .sub-menu li { position: static; }
+.nav-links .sub-menu a,
+#site-nav .nav-links .sub-menu a,
+#site-nav.scrolled .nav-links .sub-menu a,
+#site-nav.always-light .nav-links .sub-menu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft) !important;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-links .sub-menu a:hover {
+  background: var(--green-light);
+  color: var(--green) !important;
+}
 
 /* ── NAV: ALWAYS-LIGHT VARIANT (story / light header style) ── */
 #site-nav.always-light {
@@ -262,6 +359,29 @@ footer.footer-green .footer-right a:hover { color: rgba(255,255,255,0.9); }
 .site-main h1 { margin-bottom: 24px; }
 .site-main p  { margin-bottom: 16px; }
 
+.btn-gold {
+    flex-shrink: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 15px 38px;
+    border-radius: 3px;
+    background: var(--gold);
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+    white-space: nowrap;
+}
+.btn-gold:hover {
+    background: var(--gold-light);
+    color: var(--ink);
+    transform: translateY(-1px);
+}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -272,10 +392,222 @@ footer.footer-green .footer-right a:hover { color: rgba(255,255,255,0.9); }
   50%       { opacity: 1;   transform: scaleY(1.2); }
 }
 
+/* ── EDITOR CONTENT AREA (Gutenberg blocks before footer) ── */
+.page-editor-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 72px 48px;
+  color: var(--ink-soft);
+}
+.page-editor-content > * + * { margin-top: 1.5em; }
+.page-editor-content h1,
+.page-editor-content h2,
+.page-editor-content h3,
+.page-editor-content h4 {
+  color: var(--ink);
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+.page-editor-content p {
+  font-size: 15.5px;
+  line-height: 1.85;
+}
+.page-editor-content ul,
+.page-editor-content ol {
+  padding-left: 1.5em;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.page-editor-content a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.page-editor-content a:hover { color: var(--green-dark); }
+.page-editor-content img {
+  border-radius: 3px;
+  max-width: 100%;
+  height: auto;
+}
+.page-editor-content .wp-block-separator {
+  border: none;
+  border-top: 1px solid var(--border-soft);
+  margin: 2em 0;
+}
+@media (max-width: 768px) {
+  .page-editor-content { padding: 48px 24px; }
+}
+
+/* ── HAMBURGER BUTTON ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+  z-index: 110;
+}
+.nav-hamburger span {
+  display: block;
+  height: 1.5px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: transform 0.25s ease, opacity 0.2s ease, background 0.3s;
+  transform-origin: center;
+}
+#site-nav.scrolled .nav-hamburger span,
+#site-nav.always-light .nav-hamburger span {
+  background: var(--ink-soft);
+}
+/* X state */
+.nav-hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── MOBILE MENU OVERLAY ── */
+.nav-mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 105;
+  background: rgba(20,45,15,0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.nav-mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Slide-in panel */
+.nav-mobile-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(300px, 85vw);
+  height: fit-content;
+  background: rgba(247,250,245,0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-left: 1px solid var(--border-soft);
+  padding: 80px 32px 40px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-mobile-menu.open .nav-mobile-panel {
+  transform: translateX(0);
+}
+
+/* Mobile nav links list */
+.nav-mobile-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+.nav-mobile-links > li {
+  border-bottom: 1px solid var(--border-soft);
+}
+.nav-mobile-links > li > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-mobile-links > li > a:hover { color: var(--green); }
+
+/* Sub-menu toggle indicator */
+.nav-mobile-links .menu-item-has-children > a::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink-light);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.nav-mobile-links .menu-item-has-children.expanded > a::after {
+  content: '−';
+}
+
+/* Sub-menu */
+.nav-mobile-links .sub-menu {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8px 12px;
+}
+.nav-mobile-links .menu-item-has-children.expanded > .sub-menu {
+  display: block;
+}
+.nav-mobile-links .sub-menu a {
+  display: block;
+  padding: 10px 0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-mobile-links .sub-menu a:hover { color: var(--green); }
+
+/* Mobile CTA */
+.nav-mobile-cta {
+  display: block;
+  margin-top: 28px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 13px 24px;
+  border-radius: 30px;
+  border: 1.5px solid var(--green);
+  color: var(--green);
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s;
+  flex-shrink: 0;
+}
+.nav-mobile-cta:hover { background: var(--green); color: #fff; }
+
+/* Prevent body scroll when menu is open */
+body.nav-open { overflow: hidden; }
+
+/* ── PREVENT TOP WHITESPACE ──
+   • Kills any margin/padding WordPress, plugins, or browsers inject onto
+     html/body that would push the full-viewport hero away from the top.
+   • For logged-in users: WP admin bar injects html { margin-top: 32px !important }.
+     We undo it and shift #site-nav down so it sits below the bar instead. ── */
+html, body { margin-top: 0 !important; padding-top: 0 !important; }
+
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   #site-nav { padding: 14px 20px; }
   .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
   footer { padding: 24px 20px; flex-direction: column; text-align: center; }
   .footer-right { justify-content: center; text-align: center; }
   .site-main { padding: 100px 24px 60px; }

@@ -446,4 +446,6 @@ if ( $cta_use_default ) {
 })();
 </script>
 
+<?php get_template_part( 'template-parts/editor-content' ); ?>
+
 <?php get_footer(); ?>

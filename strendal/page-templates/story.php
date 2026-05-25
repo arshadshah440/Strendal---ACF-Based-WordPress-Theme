@@ -478,6 +478,8 @@ get_header();
   <a href="<?php echo esc_url( $cta_btn_url ); ?>" class="hs-cta-btn"><?php echo esc_html( $cta_btn_text ); ?></a>
 </section>
 
+<?php get_template_part( 'template-parts/editor-content' ); ?>
+
 <?php get_footer(); ?>
 
 <script>

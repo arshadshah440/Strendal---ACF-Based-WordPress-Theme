@@ -545,6 +545,8 @@ if ( $lo_cta_ud ) {
 })();
 </script>
 
+<?php get_template_part( 'template-parts/editor-content' ); ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>
